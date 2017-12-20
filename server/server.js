@@ -10,6 +10,6 @@ app.use(express.static(publicPath));
 console.log(__dirname + '/../public');
 console.log(publicPath);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`server is up on port ${port}`)
 });
