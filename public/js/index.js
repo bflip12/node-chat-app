@@ -15,6 +15,10 @@ socket.on('disconnect', function () {
 
 socket.on('newMessage', function (message) {
   console.log('New message', message);
+  var li = jQuery('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
+
+  jQuery('#messages').append(li);
 });
 
 socket.on('welcomeToChatMessage', function (message) {
@@ -23,4 +27,15 @@ socket.on('welcomeToChatMessage', function (message) {
 
 socket.on('newUserJoined', function (message) {
   console.log('New message', message);
+});
+
+jQuery('#message-form').on('submit', function (e) {
+  e.preventDefault();
+
+  socket.emit('createMessage', {
+    from: 'user',
+    text: jQuery('[name=message]').val()
+  }, function () {
+
+  });
 });
